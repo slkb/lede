@@ -7,7 +7,7 @@
 # <https://github.com/KFERMercer/OpenWrt-CI>
 #
 
-name: 竞斗云默认编译p2w_r619ac128M+插件
+name: x86 64
 
 on:
   push:
@@ -25,7 +25,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-
+      - name: start
+        run: curl "https://sc.ftqq.com/SCU57843T2ff932ee139ac5d34c0e18bd1836b7945d5ab38719b19.send?text=make-start"
       - name: Checkout
         uses: actions/checkout@master
         with:
@@ -55,10 +56,11 @@ jobs:
           cd package
           mkdir openwrt-packages
           cd openwrt-packages
-          git clone git://github.com/apollo-ng/luci-theme-darkmatter.git
+          git clone https://github.com/apollo-ng/luci-theme-darkmatter.git
           #git clone https://github.com/openwrt-develop/luci-theme-atmaterial.git
           #git clone https://github.com/Ameykyl/luci-app-koolproxyR
           git clone https://github.com/rosywrt/luci-theme-rosy
+          mv luci-theme-darkmatter/luci/theme/luci-theme-darkmatter ./luci-theme-darkmatter
       - name: Update feeds
         run: |
           ./scripts/feeds update -a
@@ -69,11 +71,11 @@ jobs:
           touch ./.config
           
           # 编译x64固件:
-          # cat >> .config <<EOF
-          # CONFIG_TARGET_x86=y
-          # CONFIG_TARGET_x86_64=y
-          # CONFIG_TARGET_x86_64_Generic=y
-          # EOF
+          cat >> .config <<EOF
+          CONFIG_TARGET_x86=y
+          CONFIG_TARGET_x86_64=y
+          CONFIG_TARGET_x86_64_Generic=y
+          EOF
           
           
           ## 编译youku固件
@@ -84,20 +86,21 @@ jobs:
           #EOF
           
           # 编译竞斗云固件
-          cat >> .config <<EOF
-          CONFIG_TARGET_ipq40xx=y
-          CONFIG_TARGET_ipq40xx_DEVICE_p2w_r619ac-128m=y
-          EOF
+          # cat >> .config <<EOF
+          # CONFIG_TARGET_ipq40xx=y
+          # CONFIG_TARGET_ipq40xx_DEVICE_p2w_r619ac-128m=y
+          # EOF
           
           # 固件压缩:
-          # cat >> .config <<EOF
-          # CONFIG_TARGET_IMAGES_GZIP=y
-          # EOF
+          cat >> .config <<EOF
+          CONFIG_TARGET_IMAGES_GZIP=y
+          EOF
           
           # 编译UEFI固件:
-          # cat >> .config <<EOF
-          # CONFIG_EFI_IMAGES=y
-          # EOF
+          cat >> .config <<EOF
+          CONFIG_EFI_IMAGES=y
+          EOF
+          
           # IPv6支持:
           cat >> .config <<EOF
           CONFIG_PACKAGE_dnsmasq_full_dhcpv6=y
@@ -165,6 +168,13 @@ jobs:
           CONFIG_PACKAGE_luci-app-webadmin=y
           CONFIG_PACKAGE_luci-app-wireguard=y
           CONFIG_PACKAGE_luci-app-wrtbwmon=y
+          CONFIG_PACKAGE_luci-app-baidupcs-web=y
+          CONFIG_PACKAGE_luci-app-kodexplorer=y
+          CONFIG_PACKAGE_luci-app-openvpn=y
+          CONFIG_PACKAGE_luci-app-openvpn-server=y
+          CONFIG_PACKAGE_luci-app-minidlna=y
+          CONFIG_PACKAGE_luci-app-verysync=y
+          
           EOF
           
           # CONFIG_PACKAGE_npc=y
@@ -220,3 +230,5 @@ jobs:
         with:
           name: OpenWrt firmware
           path: ./bin/targets/
+      - name: 通知
+        run: curl "https://sc.ftqq.com/SCU57843T2ff932ee139ac5d34c0e18bd1836b7945d5ab38719b19.send?text=make-done"
