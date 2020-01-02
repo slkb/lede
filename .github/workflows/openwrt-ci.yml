@@ -7,7 +7,7 @@
 # <https://github.com/KFERMercer/OpenWrt-CI>
 #
 
-name: youku修改源代码编译
+name: youku新增dark主题和dlna等插件
 
 on:
   push:
@@ -68,7 +68,6 @@ jobs:
           rm -f ./.config*
           touch ./.config
 
-        # 编译youku固件
           cat >> .config <<EOF
           CONFIG_TARGET_ramips=y
           CONFIG_TARGET_ramips_mt7620=y
