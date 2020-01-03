@@ -112,11 +112,12 @@ jobs:
           CONFIG_PACKAGE_luci-theme-darkmatter=y
           CONFIG_PACKAGE_luci-theme-rosy=y
           CONFIG_PACKAGE_curl=y
-          CONFIG_PACKAGE_luci-app-sfe=y
-          CONFIG_PACKAGE_luci-app-smartdns=y
-          CONFIG_PACKAGE_luci-proto-bonding=y
-          CONFIG_PACKAGE_shortcut-fe=y
           EOF
+          #CONFIG_PACKAGE_luci-app-sfe=y
+          #CONFIG_PACKAGE_luci-app-smartdns=y
+          #CONFIG_PACKAGE_luci-proto-bonding=y
+          #CONFIG_PACKAGE_shortcut-fe=y
+          
           
           #CONFIG_PACKAGE_luci-app-verysync=y
           #CONFIG_PACKAGE_npc=y
