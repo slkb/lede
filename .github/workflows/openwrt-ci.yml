@@ -7,7 +7,7 @@
 # <https://github.com/KFERMercer/OpenWrt-CI>
 #
 
-name: youku新增dark主题和dlna等插件
+name: 竞斗云新增dark主题和dlna等插件+尝试插件
 
 on:
   push:
@@ -69,29 +69,8 @@ jobs:
           touch ./.config
 
           cat >> .config <<EOF
-          CONFIG_TARGET_ramips=y
-          CONFIG_TARGET_ramips_mt7620=y
-          CONFIG_TARGET_ramips_mt7620_DEVICE_youku_yk1=y
-          EOF
-
-          # 固件压缩:
-          # cat >> .config <<EOF
-          # CONFIG_TARGET_IMAGES_GZIP=y
-          # EOF
-
-          # 编译UEFI固件:
-          # cat >> .config <<EOF
-          # CONFIG_EFI_IMAGES=y
-          # EOF
-
-          # IPv6支持:
-          cat >> .config <<EOF
           CONFIG_PACKAGE_dnsmasq_full_dhcpv6=y
           CONFIG_PACKAGE_ipv6helper=y
-          EOF
-
-          # 多文件系统支持:
-          cat >> .config <<EOF
           CONFIG_PACKAGE_kmod-fs-nfs=y
           CONFIG_PACKAGE_kmod-fs-nfs-common=y
           CONFIG_PACKAGE_kmod-fs-nfs-v3=y
@@ -100,10 +79,6 @@ jobs:
           CONFIG_PACKAGE_kmod-fs-squashfs=y
           CONFIG_PACKAGE_kmod-fs-ext4=y
           CONFIG_PACKAGE_kmod-fs-vfat=y
-          EOF
-
-          # USB3.0支持:
-          cat >> .config <<EOF
           CONFIG_PACKAGE_kmod-usb-core=y
           CONFIG_PACKAGE_kmod-usb-ohci=y
           CONFIG_PACKAGE_kmod-usb-ohci-pci=y
@@ -112,36 +87,6 @@ jobs:
           CONFIG_PACKAGE_kmod-usb2-pci=y
           CONFIG_PACKAGE_kmod-usb-storage=y
           CONFIG_PACKAGE_kmod-usb-storage-extras=y
-          EOF
-
-          #CONFIG_PACKAGE_kmod-usb3=y
-          # 常用LuCI插件选择:
-          # cat >> .config <<EOF
-          # CONFIG_PACKAGE_luci-app-adbyby-plus=y
-          # CONFIG_PACKAGE_luci-app-aria2=y
-          # CONFIG_PACKAGE_luci-app-baidupcs-web=y
-          # CONFIG_PACKAGE_luci-app-docker=y
-          # CONFIG_PACKAGE_luci-app-frpc=y
-          # CONFIG_PACKAGE_luci-app-kodexplorer=y
-          # CONFIG_PACKAGE_luci-app-minidlna=y
-          # CONFIG_PACKAGE_luci-app-openvpn=y
-          # CONFIG_PACKAGE_luci-app-openvpn-server=y
-          # CONFIG_PACKAGE_luci-app-qbittorrent=y
-          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Kcptun=y
-          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks=y
-          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ShadowsocksR_Server=y
-          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ShadowsocksR_Socks=y
-          # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_V2ray=y
-          # CONFIG_PACKAGE_luci-app-ttyd=y
-          # CONFIG_PACKAGE_luci-app-v2ray-server=y
-          # CONFIG_PACKAGE_luci-app-verysync=y
-          # CONFIG_PACKAGE_luci-app-webadmin=y
-          # CONFIG_PACKAGE_luci-app-wireguard=y
-          # CONFIG_PACKAGE_luci-app-wrtbwmon=y
-          # EOF
-
-          # 编译自定义插件
-          cat >> .config <<EOF
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Kcptun=y
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks=y
           CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ShadowsocksR_Server=y
@@ -157,6 +102,10 @@ jobs:
           CONFIG_PACKAGE_luci-app-openvpn=y
           CONFIG_PACKAGE_luci-app-openvpn-server=y
           CONFIG_PACKAGE_luci-app-minidlna=y
+          CONFIG_PACKAGE_luci-app-sfe=y
+          CONFIG_PACKAGE_luci-app-smartdns=y
+          CONFIG_PACKAGE_luci-proto-bonding=y
+          CONFIG_PACKAGE_shortcut-fe=y
           CONFIG_PACKAGE_luci-theme-netgear=y
           CONFIG_PACKAGE_luci-theme-darkmatter=y
           CONFIG_PACKAGE_luci-theme-rosy=y
@@ -218,4 +167,4 @@ jobs:
           name: OpenWrt firmware
           path: ./bin/targets/
       - name: 通知
-        run: curl "https://sc.ftqq.com/SCU57843T2ff932ee139ac5d34c0e18bd1836b7945d5ab38719b19.send?text=编译完成"
+        run: curl "https://sc.ftqq.com/SCU57843T2ff932ee139ac5d34c0e18bd1836b7945d5ab38719b19.send?text=竞斗云编译完成"
