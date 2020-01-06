@@ -7,7 +7,7 @@
 # <https://github.com/KFERMercer/OpenWrt-CI>
 #
 
-name: 竞斗云使用上一次成功编译的版本
+name: 竞斗云默认编译p2w_r619ac128M+插件
 
 on:
   push:
@@ -165,6 +165,8 @@ jobs:
           CONFIG_PACKAGE_luci-app-webadmin=y
           CONFIG_PACKAGE_luci-app-wireguard=y
           CONFIG_PACKAGE_luci-app-wrtbwmon=y
+          CONFIG_PACKAGE_luci-app-minidlna=y
+          CONFIG_PACKAGE_luci-app-smartdns=y
           EOF
           
           # CONFIG_PACKAGE_npc=y
@@ -220,3 +222,5 @@ jobs:
         with:
           name: OpenWrt firmware
           path: ./bin/targets/
+      - name: 通知
+        run: curl "https://sc.ftqq.com/SCU57843T2ff932ee139ac5d34c0e18bd1836b7945d5ab38719b19.send?text=竞斗云编译完成"
